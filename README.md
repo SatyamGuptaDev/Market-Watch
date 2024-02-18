@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # React Website Tutorial: ⭐Build Feature Rich Crypto Screener App with Tailwind CSS
 
 ![GitHub stars](https://img.shields.io/github/stars/codebucks27/CryptoBucks-A-crypto-screener-application?style=social&logo=ApacheSpark&label=Stars)&nbsp;&nbsp;
@@ -36,3 +37,6 @@ https://youtu.be/JPlVb3t6kx8 <br />
 
 
 
+=======
+# Market-Watch
+>>>>>>> 0702109c14e425d2c2e86fe4f91e55abd2758cdd
