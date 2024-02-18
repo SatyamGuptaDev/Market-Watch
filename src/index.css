@@ -1,13 +1,35 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap");
+
+
+@keyframes snake {
+    0% {
+      border-color: transparent transparent transparent cyan;
+      border-width: 0.3rem;
+    }
+    25% {
+      border-color: cyan transparent transparent transparent;
+      border-width: 0.3rem;
+    }
+    50% {
+      border-color: transparent cyan transparent transparent;
+      border-width: 0.3rem;
+    }
+    75% {
+      border-color: transparent transparent cyan transparent;
+      border-width: 0.3rem;
+    }
+    100% {
+      border-color: transparent transparent transparent cyan;
+      border-width: 0.3rem;
+    }
+  }
+  
+
+.animate-snake {
+    animation: snake 1s ease-in-out infinite ;
 }
