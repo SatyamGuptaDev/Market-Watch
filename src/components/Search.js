@@ -55,7 +55,9 @@ const Search = () => {
       </form>
 
       {searchText.length > 0 ? (
-        <ul className="absolute top-14 left-5 w-96 h-96 min-h-36 max-h-96 bg-gray-200 text-white font-nunito px-4 py-3 rounded overflow-x-hidden bg-opacity-60 backdrop-blur-lg gap-4">
+        <ul className="absolute top-14 left-5 w-96 h-96 min-h-36 max-h-96 bg-gray-200 text-white font-nunito px-4 py-3 rounded overflow-x-hidden bg-opacity-60 backdrop-blur-lg gap-4
+        scrollbar-thin scrollbar-thumb-gray-100 scrollbar-track-gray-200 scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thumb-hover-cyan scrollbar-track-hover-gray-100 scrollbar-thumb-active-cyan scrollbar-track-active-gray-100 
+        ">
           {searchData && searchData.length > 0 ? (
             searchData.map((coin) => {
               return (
@@ -79,7 +81,7 @@ const Search = () => {
             </li>
           ) : (
               <div className=" w-full h-full flex justify-center items-center">
-                <div className="animate-spin rounded-full h-8 w-8 border-4 border-cyan border-b-gray-200  "></div>
+                <div className="animate-spin rounded-full h-8 w-8 border-4 border-cyan border-b-gray-100  "></div>
               </div>
           )}
 

@@ -17,7 +17,7 @@ export const CryptoProvider = ({ children }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
 
-
+  const [totalCoins, setTotalCoins] = useState(250);
 
   const setReset = () => {
     setSearchedCoin("");
@@ -26,18 +26,34 @@ export const CryptoProvider = ({ children }) => {
 
   const getCryptoData = async () => {
     try {
-      // setCryptoData({});
       const data = await fetch(
         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&ids=${searchedCoin}&order=${sorting}&per_page=${perPage}&page=${currentPage}&sparkline=false&price_change_percentage=1h%2C%2024h%2C%207d%2C%2014d&locale=en`
       )
         .then((res) => res.json())
         .then((data) => data);
 
-        setCurrencyUnit(currency);
-        setSortingOption(sorting);
+      setCurrencyUnit(currency);
+      setSortingOption(sorting);
 
-        console.log(data);
-        
+      let updatedTotalCoins = totalCoins; // Define updatedTotalCoins variable
+
+      // Check if totalCoins is equal to 250
+      if (totalCoins === 250) {
+        const totalCoinsResponse = await fetch(
+          `https://api.coingecko.com/api/v3/global`
+        );
+        if (totalCoinsResponse.ok) {
+          const totalCoinsData = await totalCoinsResponse.json();
+          updatedTotalCoins = totalCoinsData.data.active_cryptocurrencies;
+        } else {
+          // If the API call fails, set updatedTotalCoins to 250
+          updatedTotalCoins = 250;
+        }
+      }
+
+      setTotalCoins(updatedTotalCoins); // Update totalCoins with updatedTotalCoins
+
+      console.log(data);
 
       setCryptoData(data);
     } catch (error) {
@@ -55,7 +71,6 @@ export const CryptoProvider = ({ children }) => {
 
       setSearchData(data);
       console.log(data);
-
     } catch (error) {
       console.log(error);
     }
@@ -63,11 +78,27 @@ export const CryptoProvider = ({ children }) => {
 
   useLayoutEffect(() => {
     getCryptoData();
-  }, [searchedCoin, currency, sorting,currentPage,perPage]);
+  }, [searchedCoin, currency, sorting, currentPage, perPage]);
 
   return (
     <CryptoContext.Provider
-      value={{ CryptoData, searchData,currencyUnit,sortingOption, currentPage, getSearchData, setSearchedCoin, setCurrency, setSorting, setReset, setSearchData, setCurrentPage, setPerPage  }}
+      value={{
+        CryptoData,
+        searchData,
+        currencyUnit,
+        sortingOption,
+        currentPage,
+        totalCoins,
+        perPage,
+        getSearchData,
+        setSearchedCoin,
+        setCurrency,
+        setSorting,
+        setReset,
+        setSearchData,
+        setCurrentPage,
+        setPerPage,
+      }}
     >
       {children}
     </CryptoContext.Provider>

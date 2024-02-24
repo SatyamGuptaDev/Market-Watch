@@ -52,12 +52,14 @@ const PerPage = () => {
   );
 };
 
+
+
 const Pagination = () => {
 
 
-  const { currentPage, setCurrentPage } = useContext(CryptoContext);
+  const { currentPage, setCurrentPage, totalCoins, perPage, CryptoData  } = useContext(CryptoContext);
 
-  const endPage = 10;
+  const endPage = Math.floor( totalCoins / perPage );
 
   const next = () => {
     setCurrentPage((currentPage) => Math.min(currentPage + 1, endPage));
@@ -68,8 +70,8 @@ const Pagination = () => {
   };
 
 
-
-
+ if(CryptoData && CryptoData.length >= perPage)
+{  
   return (
     <div className="flex items-center justify-center h-[1.8rem] ">
       <PerPage />
@@ -180,6 +182,10 @@ const Pagination = () => {
       </ul>
     </div>
   );
+}
+
+
+
 };
 
 export default Pagination;
