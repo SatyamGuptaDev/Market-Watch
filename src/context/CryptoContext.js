@@ -25,7 +25,10 @@ export const CryptoProvider = ({ children }) => {
   };
 
   const getCryptoData = async () => {
+
     try {
+
+      setCryptoData({}); // Reset CryptoData
       const data = await fetch(
         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&ids=${searchedCoin}&order=${sorting}&per_page=${perPage}&page=${currentPage}&sparkline=false&price_change_percentage=1h%2C%2024h%2C%207d%2C%2014d&locale=en`
       )

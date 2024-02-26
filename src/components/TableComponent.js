@@ -6,6 +6,10 @@ import Pagination from "./Pagination";
 const TableComponents = () => {
   const { CryptoData, currencyUnit } = useContext(CryptoContext);
 
+  const onclickCoin = (id) => {
+    window.location.href = `/${id}`;
+  }
+
   return (
     <>
       <div className="flex flex-col mt-9 border border-gray-100 rounded">
@@ -19,7 +23,7 @@ const TableComponents = () => {
               <th className="py-1">Market Cap Change</th>
               <th className="py-1">1h</th>
               <th className="py-1">24h</th>
-              <th className="py-1">7d</th>
+
             </tr>
           </thead>
           <tbody>
@@ -28,6 +32,7 @@ const TableComponents = () => {
                 <tr
                   key={crypto.id}
                   className="text-center text-base border-b border-gray-100 hover:bg-gray-200 last:border-0"
+                  onClick={() => onclickCoin(crypto.id)}
                 >
                   <td className="px-1 py-3 uppercase flex flex-row align-middle">
                     <button className="outline-0 border-0 bg-none cursor-pointer">
@@ -91,7 +96,7 @@ const TableComponents = () => {
                       ? crypto.price_change_percentage_24h.toFixed(2) + "%"
                       : "N/A"}
                   </td>
-                  <td className="px-4 py-3">7d%</td>
+
                 </tr>
               ))
             ) : (
