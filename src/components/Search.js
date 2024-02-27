@@ -20,7 +20,6 @@ const Search = () => {
   const handleInput = (e) => {
     e.preventDefault();
     const query = e.target.value;
-      
 
     setSearchText(query);
     setShowNoResults(false); // Reset showNoResults
@@ -49,15 +48,24 @@ const Search = () => {
           onBlur={() => setIsInputFocused(false)}
         />
 
-        <button type="submit" className="-translate-x-7" onClick={(e) => { e.preventDefault(); handleInput();}}>
+        <button
+          type="submit"
+          className="-translate-x-7"
+          onClick={(e) => {
+            e.preventDefault();
+            handleInput();
+          }}
+        >
           <img src={search} alt="search" className="w-full h-auto" />
         </button>
       </form>
 
       {searchText.length > 0 ? (
-        <ul className="absolute top-14 left-5 w-96 h-96 min-h-36 max-h-96 bg-gray-200 text-white font-nunito px-4 py-3 rounded overflow-x-hidden bg-opacity-60 backdrop-blur-lg gap-4
+        <ul
+          className="absolute top-14 left-5 w-96 h-96 min-h-36 max-h-96 bg-gray-200 text-white font-nunito px-4 py-3 rounded overflow-x-hidden bg-opacity-60 backdrop-blur-lg gap-4
         scrollbar-thin scrollbar-thumb-gray-100 scrollbar-track-gray-200 scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thumb-hover-cyan scrollbar-track-hover-gray-100 scrollbar-thumb-active-cyan scrollbar-track-active-gray-100 
-        ">
+        "
+        >
           {searchData && searchData.length > 0 ? (
             searchData.map((coin) => {
               return (
@@ -73,20 +81,18 @@ const Search = () => {
                   />
                   <span>{coin.name}</span>
                 </li>
-              ) 
+              );
             })
           ) : showNoResults ? (
             <li>
               <span className="text-red-500">No results found</span>
             </li>
           ) : (
-              <div className=" w-full h-full flex justify-center items-center">
-                <div className="animate-spin rounded-full h-8 w-8 border-4 border-cyan border-b-gray-100  "></div>
-              </div>
+            <div className=" w-full h-full flex justify-center items-center">
+              <div className="animate-spin rounded-full h-8 w-8 border-4 border-cyan border-b-gray-100  "></div>
+            </div>
           )}
-
         </ul>
-
       ) : isInputFocused && searchText.length === 0 ? (
         <ul className="absolute top-14 left-5 w-96 h-auto bg-gray-200 text-white font-nunito px-4 py-3 rounded overflow-x-hidden bg-opacity-60 backdrop-blur-lg flex-col">
           <li>Please enter a search term</li>

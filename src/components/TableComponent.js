@@ -2,13 +2,10 @@ import React, { useContext } from "react";
 import { CryptoContext } from "../context/CryptoContext";
 import "../../src/index.css";
 import Pagination from "./Pagination";
+import { Link } from "react-router-dom";
 
 const TableComponents = () => {
   const { CryptoData, currencyUnit } = useContext(CryptoContext);
-
-  const onclickCoin = (id) => {
-    window.location.href = `/${id}`;
-  }
 
   return (
     <>
@@ -23,7 +20,6 @@ const TableComponents = () => {
               <th className="py-1">Market Cap Change</th>
               <th className="py-1">1h</th>
               <th className="py-1">24h</th>
-
             </tr>
           </thead>
           <tbody>
@@ -32,23 +28,28 @@ const TableComponents = () => {
                 <tr
                   key={crypto.id}
                   className="text-center text-base border-b border-gray-100 hover:bg-gray-200 last:border-0"
-                  onClick={() => onclickCoin(crypto.id)}
                 >
                   <td className="px-1 py-3 uppercase flex flex-row align-middle">
-                    <button className="outline-0 border-0 bg-none cursor-pointer">
-                      {/* Your SVG code */}
-                    </button>
-
-                    <button className="self-center flex flex-row uppercase">
-                      <img
-                        src={crypto.image}
-                        alt="crypto"
-                        className="w-[1.2rem] h-[1.2rem] mx-[0.5rem]"
-                      />
-                      {crypto.symbol}
-                    </button>
+                    <Link to={`/${crypto.id}`}>
+                      <button className="self-center flex flex-row uppercase">
+                        <img
+                          src={crypto.image}
+                          alt="crypto"
+                          className="w-[1.2rem] h-[1.2rem] mx-[0.5rem]"
+                        />
+                        {crypto.symbol}
+                      </button>
+                    </Link>
                   </td>
-                  <td className="px-4 py-3">{crypto.name}</td>
+
+                  <td className="px-4 py-3">
+                    <Link
+                      to={`/${crypto.id}`}
+                      className=" cursor-pointer"
+                    >
+                      {crypto.name}
+                    </Link>
+                  </td>
                   <td className="px-4 py-3">
                     {new Intl.NumberFormat("en-US", {
                       style: "currency",
@@ -96,7 +97,6 @@ const TableComponents = () => {
                       ? crypto.price_change_percentage_24h.toFixed(2) + "%"
                       : "N/A"}
                   </td>
-
                 </tr>
               ))
             ) : (
