@@ -19,7 +19,7 @@ export const CryptoProvider = ({ children }) => {
 
   const [totalCoins, setTotalCoins] = useState(250);
 
-  const [coinData, setCoinData] = useState({});
+  const [coinData, setCoinData] = useState(null);
 
   const setReset = () => {
     setSearchedCoin("");
