@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import { CryptoContext } from "../context/CryptoContext";
 import { useEffect, useState } from "react";
+import Charts from "./Charts";
 
 function IndicatorBar({ currentPrice, high, low }) {
   const [green, setgreen] = useState(0);
@@ -57,7 +58,7 @@ function CryptoDetails() {
       onClick={closeModal}
     >
       <div
-        className="w-[65%] h-[76%] bg-gray-300 bg-opacity-75 rounded-lg text-white relative select-none overflow-y-auto overflow-x-hidden     scrollbar-thin scrollbar-thumb-gray-100 scrollbar-track-gray-200 scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thumb-hover-cyan scrollbar-track-hover-gray-100 scrollbar-thumb-active-cyan scrollbar-track-active-gray-100 "
+        className="w-[65%] h-[78%] bg-gray-300 bg-opacity-80 rounded-lg text-white relative select-none overflow-y-auto overflow-x-hidden     scrollbar-thin scrollbar-thumb-gray-100 scrollbar-track-gray-200 scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thumb-hover-cyan scrollbar-track-hover-gray-100 scrollbar-thumb-active-cyan scrollbar-track-active-gray-100 "
         onClick={(e) => e.stopPropagation()}
       >
         {coinData ? (
@@ -247,8 +248,8 @@ function CryptoDetails() {
                   </div>
                 </div>
 
-                <div className="flex w-full justify-between flex-wrap mt-2">
-                  <div className="flex flex-col text-[13px]">
+                <div className="flex w-full justify-between flex-wrap mt-2 ">
+                  <div className="flex flex-col text-[13px] ">
                     <div className="bg-gray-200 m-[2px] pl-2 pr-2 pt-1 pb-1 rounded-md">
                       <a
                         href={coinData?.links?.homepage[0]}
@@ -306,11 +307,7 @@ function CryptoDetails() {
                     <div
                       className={`text-sm px-1 ml-2 font-medium flex items-center
                           rounded uppercase bg-opacity-25
-                          ${
-                            coinData.sentiment_votes_up_percentage > 50
-                              ? "bg-[#00800054] text-green"
-                              : "bg-[#ff050560] text-[#ffbbbb]"
-                          }
+                               bg-[#00800054] text-green
                         `}
                     >
                       <span>
@@ -325,14 +322,10 @@ function CryptoDetails() {
                         viewBox="0 0 14 14"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
-                        className={`
+                        className="
                             w-[1rem] ml-0.5
-                            ${
-                              coinData.sentiment_votes_up_percentage > 50
-                                ? "fill-green rotate-180"
-                                : "fill-[#ffbbbb]"
-                            }
-                          `}
+                            fill-green rotate-180"
+                          
                       >
                         <path
                           d="M7.47951 11.4153C7.42599 11.493 7.35438 11.5565 7.27085 11.6004C7.18732 11.6444 7.09437 11.6673 7.00001 11.6673C6.90564 11.6673 6.81269 11.6444 6.72916 11.6004C6.64563 11.5565 6.57402 11.493 6.52051 11.4153L1.27051 3.83194C1.20974 3.74447 1.1741 3.64202 1.16747 3.53572C1.16084 3.42943 1.18346 3.32334 1.23289 3.229C1.28232 3.13466 1.35665 3.05567 1.44782 3.0006C1.53899 2.94554 1.6435 2.91652 1.75001 2.91669H12.25C
@@ -343,11 +336,7 @@ function CryptoDetails() {
                     <div
                       className={`text-sm px-1 ml-2 font-medium flex items-center
                           rounded uppercase bg-opacity-25 mt-2
-                          ${
-                            coinData.sentiment_votes_down_percentage > 50
-                              ? "bg-red text-red"
-                              : "bg-[#ff050560] text-[#c49c9c]"
-                          }
+                          bg-[#ff050560] text-[#c49c9c]
                         `}
                     >
                       <span>
@@ -364,11 +353,7 @@ function CryptoDetails() {
                         xmlns="http://www.w3.org/2000/svg"
                         className={`
                             w-[1rem] ml-0.5
-                            ${
-                              coinData.sentiment_votes_down_percentage > 50
-                                ? "fill-red rotate-180"
-                                : "fill-[#ffbbbb]"
-                            }
+                            fill-[#ffbbbb]
                           `}
                       >
                         <path
@@ -382,20 +367,58 @@ function CryptoDetails() {
               </div>
 
               {/* Charts here */}
-              <div className="w-full md:w-[55%] h-full p-1 flex flex-col gap-2 bg-[#2eff2e23] "></div>
-            </div>
-          </div>
-        ) : (
-          <div className="flex justify-center items-center h-full">
-            <div className="animate-spin rounded-full h-11 w-11 border-t-2 border-b-2 border-gray-100 mr-4"></div>
-            <div className=" font-bold text-lg">Loading...</div>
-          </div>
-        )}
-      </div>
-    </div>,
+              <div className=" w-full md:w-[55%] md:-mt-2 pl-4  h-full flex flex-col  bg-[#00ffff00] ">
+                <div className=" w-full h-[50%]  ">
+                  <Charts coinId={coinId} currencyUnit={currencyUnit} />
+                </div>
+                <div className="w-full mt-5  ">
+                  {/* Market Cap Rank:5
+                    CoinGecko Rank:
+                    CoinGecko Score: */}
 
-    document.getElementById("modal")
-  );
+                  <div className="flex w-full h-full flex-col gap-2 p-2">
+                    <div className="flex w-full  items-center">
+                      <span className="text-md capitalize text-gray-100 mr-2">
+                        Market Cap Rank:
+                      </span>
+                      <h2 className="text-md text-[#eaeaea] font-bold">
+                        {coinData.market_cap_rank}
+                      </h2>
+                    </div>
+                    <div className="flex w-full items-center">
+                      <span className="text-md capitalize text-gray-100 mr-2">
+                        CoinGecko Rank:
+                      </span>
+                      <h2 className="text-md  text-[#cecece] font-bold">
+                        {coinData.coingecko_rank}
+                      </h2>
+                    </div>
+                    <div className="flex w-full  items-center">
+                      <span className="text-md capitalize text-gray-100 mr-2">
+                        CoinGecko Score:
+                      </span>
+                      <h2 className="text-md text-[#cecece] font-bold">
+                        {coinData.coingecko_score}
+                      </h2>
+                    </div>
+                  </div>
+
+                </div>
+
+                </div>
+                </div>
+                </div>
+                ) : (
+                <div className="flex justify-center items-center h-full">
+                  <div className="animate-spin rounded-full h-11 w-11 border-t-2 border-b-2 border-gray-100 mr-4"></div>
+                  <div className=" font-bold text-lg">Loading...</div>
+                </div>
+                )}
+                </div>
+                </div>,
+
+                document.getElementById("modal")
+                );
 }
 
 export default CryptoDetails;
