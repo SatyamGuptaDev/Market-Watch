@@ -26,6 +26,13 @@ View comprehensive details about each cryptocurrency including its logo, market 
 
 Visualize cryptocurrency data through interactive charts depicting price trends, total volume, and market capitalization over different periods such as 7 days, 14 days, and 30 days.
 
+
+### Currency Selection
+
+## Change the Currency and Explore
+Market Watch provides users with the flexibility to change the currency for viewing all data. By entering the desired currency ID, such as USD, INR, or BTC, users can seamlessly switch the currency and observe every data point in the selected currency. This feature allows for a personalized experience tailored to the user's preferred currency. By default we provide INR as currency, but you can change it.
+
+
 ### Trending Coins
 
 Stay updated on the latest trends in the crypto market with a dedicated page/list showcasing trending coins.
