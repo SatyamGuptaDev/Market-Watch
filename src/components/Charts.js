@@ -12,11 +12,14 @@ import {
 
 const CustomTooltip = ({ active, payload, currency }) => {
   if (active && payload && payload.length) {
+    const formattedValue = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: currency,
+    }).format(payload[0].value);
+
     return (
       <div style={{ backgroundColor: "transparent", color: "#14ffec" }}>
-        <p>{`${payload[0].payload.date} : ${
-          payload[0].value.toFixed(8) // Format the value without rounding off
-        } ${currency}`}</p>
+        <p>{`${payload[0].payload.date} : ${formattedValue}`}</p>
       </div>
     );
   }
@@ -24,15 +27,19 @@ const CustomTooltip = ({ active, payload, currency }) => {
 };
 
 
+
 const ChartBlock = ({ data, currency , type}) => {
   let minValue = Math.min(...data.map((item) => item.value));
   let maxValue = Math.max(...data.map((item) => item.value));
+
+  
   maxValue += maxValue * 0.0001;
   minValue -= minValue * 0.0002;
-
+  
   // Calculate equal area for each grid line
   const range = maxValue - minValue;
-  const interval = range / 5; // 5 grid lines
+  const interval = range /6 ; // 5 grid lines
+  
 
   // Round the values to the nearest multiple of interval
   minValue = Math.floor(minValue / interval) * interval;
@@ -40,7 +47,8 @@ const ChartBlock = ({ data, currency , type}) => {
 
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <LineChart
+      { data.length>0 ? 
+    <LineChart
         data={data}
         margin={{
           top: 0,
@@ -49,6 +57,7 @@ const ChartBlock = ({ data, currency , type}) => {
           bottom: 0,
         }}
       >
+        <>
         <Line
           type="monotone"
           dataKey="value"
@@ -72,8 +81,11 @@ const ChartBlock = ({ data, currency , type}) => {
             bottom: 10,
           }
         } verticalAlign="top"  iconSize={10} wrapperStyle={{ color: "#14ffec" }}  payload={[{ value: type, type: "line", color: "#14ffec" }]}  />
-        
+
+        </>
       </LineChart>
+      : <div className="flex flex-row justify-center items-center w-full h-full text-gray-100">Loading...</div>
+      }
     </ResponsiveContainer>
   );
 };
@@ -134,6 +146,8 @@ const Charts = ({ coinId, currencyUnit }) => {
     }
   }, [coinMarketData, typeOfData]);
 
+
+
   return (
     <>
       <div className="flex flex-col w-full h-full self-start justify-start items-start">
@@ -142,6 +156,8 @@ const Charts = ({ coinId, currencyUnit }) => {
 
           <ChartBlock data={chartData} currency={currencyUnit} type={typeOfData} />
         </div>
+
+
         <div className="flex flex-row justify-center gap-2  flex-wrap">
           <button
             onClick={() => setTypeOfData("prices")}
