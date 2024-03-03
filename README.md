@@ -88,8 +88,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Author
 
-Satyam Gupta - [GitHub](https://github.com/SatyamGuptaDev) | [LinkedIn](https://www.linkedin.com/in/satyam-gupta-5a127a1b6/)
+Satyam Gupta - [GitHub](https://github.com/SatyamGuptaDev) | [LinkedIn](https://www.linkedin.com/in/devsg/)
 
 ---
 
-**Note:** This README is dynamically generated to provide a detailed overview of the Market Watch - Crypto Screener App. For any inquiries or feedback, please contact the author.
